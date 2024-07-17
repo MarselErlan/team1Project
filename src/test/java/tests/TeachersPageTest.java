@@ -1,14 +1,35 @@
-
 package tests;
 
-import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import pages.LoginPage;
 import pages.TeachersPage;
 import utilities.Driver;
+import org.testng.annotations.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.Assert;
+
+
+
 
 public class TeachersPageTest {
+
+    TeachersPage teachers;
+
+    @BeforeMethod
+    public void setUp() {
+        Driver.getDriver().get("https://batch-6.studymate.us/login");
+        teachers = new TeachersPage();
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        Driver.getDriver().close();
+    }
+
+
+
     TeachersPage teachersPage = new TeachersPage();
     LoginPage loginPage = new LoginPage();
 
@@ -39,32 +60,51 @@ public class TeachersPageTest {
     }
 
 
-    @Test
-    public void TeachersTestingFunc() throws InterruptedException {
-        TeachersPage teachers = new TeachersPage();
 
-        Driver.getDriver().get("https://batch-6.studymate.us/login");
 
-        teachers.login.sendKeys("admin@codewise.com");
-        teachers.password.sendKeys("codewise123");
-        teachers.loginBtn.click();
 
-        teachers.chooseTeachers.click();
-        teachers.toremoveIndex1.click();
-        teachers.removeIndex1.click();
-        teachers.confirmRemove.click();
-        Thread.sleep(100);
+        @Test
+        public void TeachersTestingFunc() throws InterruptedException {
+            // Login to the application
+            teachers.login.sendKeys("admin@codewise.com");
+            teachers.password.sendKeys("codewise123");
+            teachers.loginBtn.click();
 
-        if (teachers.confirmSuccessfullyDeleted.getText().equals("Instructor successfully deleted")) {
-            System.out.println("Yes: " + teachers.confirmSuccessfullyDeleted.getText());
-        } else {
-            System.out.println("No");
+            // Assert that login was successful
+            Assert.assertTrue(teachers.chooseTeachers.isDisplayed(), "Login failed or Teachers page not visible.");
+
+            // Navigate to the Teachers page
+            teachers.chooseTeachers.click();
+
+            // Assert that the Teachers page is displayed
+            Assert.assertTrue(teachers.toremoveIndex1.isDisplayed(), "Teachers page is not displayed.");
+
+            // Select a teacher to remove
+            teachers.toremoveIndex1.click();
+
+            // Assert that the delete option is visible
+            Assert.assertTrue(teachers.removeIndex1.isDisplayed(), "Delete option is not visible.");
+
+            // Confirm removal
+            teachers.removeIndex1.click();
+            teachers.confirmRemove.click();
+
+            // Wait for confirmation message
+            Thread.sleep(100);
+
+            // Assert that the teacher was successfully deleted
+            String actualMessage = teachers.confirmSuccessfullyDeleted.getText();
+            String expectedMessage = "Instructor successfully deleted";
+
+            Assert.assertEquals(actualMessage, expectedMessage, "Instructor deletion message did not match.");
         }
-    }
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
