@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+    <test name="Trash Tests">
+        <classes>
+            <class name="tests.TrashTests"/>
+        </classes>
+    </test>
+</suite>

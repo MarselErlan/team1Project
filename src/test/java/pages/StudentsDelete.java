@@ -13,7 +13,6 @@ public class StudentsDelete {
     public StudentsDelete(){
         driver = Driver.getDriver();
         PageFactory.initElements(driver, this);
-
     }
 
     @FindBy(xpath = "//input[@name=\"email\"]")
@@ -39,5 +38,4 @@ public class StudentsDelete {
 
     @FindBy(xpath = "//p[text()='Student successfully deleted']")
     public WebElement confirmSuccessfullyDeleted;
-
 }

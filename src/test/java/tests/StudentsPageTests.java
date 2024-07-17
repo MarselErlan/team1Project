@@ -1,15 +1,10 @@
-
-
-
 package tests;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.openqa.selenium.By;
+import org.testng.annotations.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.Assert;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.CommonPage;
 import pages.LoginPage;
 import pages.StudentsPage;
@@ -19,17 +14,33 @@ import java.time.Duration;
 
 public class StudentsPageTests {
 
-    WebDriver driver = Driver.getDriver();
-    StudentsPage studentsPage =new StudentsPage();
-    CommonPage commonPage = new CommonPage();
-    LoginPage loginPage = new LoginPage();
+    WebDriver driver;
+    StudentsPage studentsPage;
+    CommonPage commonPage;
+    LoginPage loginPage;
+
+    @BeforeMethod
+    public void setUp() {
+        driver = Driver.getDriver();
+        studentsPage = new StudentsPage();
+        commonPage = new CommonPage();
+        loginPage = new LoginPage();
+        driver.get("https://batch-6.studymate.us/login");
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        Driver.getDriver().close();
+    }
 
     @Test
     public void addStudent() throws InterruptedException {
-        driver.get("https://batch-6.studymate.us/login");
-        loginPage.testLogin("admin@codewise.com","codewise123","English");
+        loginPage.testLogin("admin@codewise.com", "codewise123", "English");
         loginPage.loginButton.click();
-        Thread.sleep(Duration.ofSeconds(2));
+
+        // Wait for the login to complete
+        Thread.sleep(Duration.ofSeconds(2).toMillis());
+
         commonPage.studentsPage.click();
 
         studentsPage.addStudent.click();
@@ -44,12 +55,13 @@ public class StudentsPageTests {
         studentsPage.offlineFormat.click();
 
         studentsPage.addB8t.click();
-        Thread.sleep(2000);
+
+        // Wait for the student to be added and the page to refresh
+        Thread.sleep(Duration.ofSeconds(2).toMillis());
+
         driver.navigate().refresh();
 
-        Assert.assertEquals("Azizbek Usman", studentsPage.nameOfAddedStud.getText());
-
+        // Assert that the student was added successfully
+        Assert.assertEquals(studentsPage.nameOfAddedStud.getText(), "Azizbek Usman");
     }
-
-
 }

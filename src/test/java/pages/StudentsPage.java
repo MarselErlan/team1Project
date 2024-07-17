@@ -1,4 +1,3 @@
-
 package pages;
 
 import org.openqa.selenium.WebDriver;
@@ -15,38 +14,29 @@ public class StudentsPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy (xpath = "//button[contains(text(), \"Add student\")]")
+    @FindBy(xpath = "//button[contains(text(), \"Add student\")]")
     public WebElement addStudent;
 
-
-
-
-    @FindBy (xpath = "//input[@name=\"name\"]")
+    @FindBy(xpath = "//input[@name=\"name\"]")
     public WebElement firstNameInput;
-
 
     @FindBy(xpath = "//input[@name=\"lastName\"]")
     public WebElement lastNameInput;
 
-
     @FindBy(className = "css-6vwzer")
     public WebElement phoneNumInput;
-
 
     @FindBy(xpath = "//input[@name=\"email\"]")
     public WebElement emailInput;
 
-
-    @FindBy (id = "mui-component-select-groupId")
+    @FindBy(id = "mui-component-select-groupId")
     public WebElement groupSelect;
 
-    @FindBy (xpath = "//li[contains(text(), 'Test')]")
+    @FindBy(xpath = "//li[contains(text(), 'Test')]")
     public WebElement testGroup;
-
 
     @FindBy(id = "mui-component-select-studyFormat")
     public WebElement studyFormat;
-
 
     @FindBy(xpath = "//li[contains(text(), 'OFFLINE')]")
     public WebElement offlineFormat;
@@ -57,4 +47,3 @@ public class StudentsPage {
     @FindBy(xpath = "//table//tbody//tr[1]/td[2]")
     public WebElement nameOfAddedStud;
 }
-

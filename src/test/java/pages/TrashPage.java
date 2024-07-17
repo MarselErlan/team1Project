@@ -1,4 +1,5 @@
 package pages;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -9,8 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.Driver;
 
 import java.time.Duration;
-import java.util.List;
-
 
 public class TrashPage {
     private final Actions actions;
@@ -22,11 +21,10 @@ public class TrashPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
         this.actions = new Actions(driver);
-
     }
 
     @FindBy(xpath = "//li[text()='Trash']")
-    public WebElement trashButton ;
+    public WebElement trashButton;
 
     @FindBy(xpath = "(//table//td[3]//*[local-name()='svg']//*[local-name()='g'])[1]")
     public WebElement trashDelete;
@@ -34,21 +32,9 @@ public class TrashPage {
     @FindBy(xpath = "(//table//td[3]//*[local-name()='svg'])[1]")
     public WebElement buttonRecovered;
 
-
-
-    public void click55(){
+    public void click55() {
         trashButton.click();
         trashDelete.click();
         buttonRecovered.click();
-
     }
-
-
-
-
-
-
 }
-
-
-

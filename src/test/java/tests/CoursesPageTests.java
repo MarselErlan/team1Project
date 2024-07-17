@@ -1,11 +1,10 @@
-
 package tests;
 
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Test;
+import org.testng.annotations.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.Assert;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import pages.CommonPage;
 import pages.CoursesPage;
 import pages.LoginPage;
@@ -15,18 +14,31 @@ import java.time.Duration;
 
 public class CoursesPageTests {
 
-    CommonPage commonPage = new CommonPage();
-    CoursesPage coursesPage = new CoursesPage();
-    LoginPage loginPage = new LoginPage();
-    WebDriver driver = Driver.getDriver();
+    CommonPage commonPage;
+    CoursesPage coursesPage;
+    LoginPage loginPage;
+    WebDriver driver;
+
+    @BeforeMethod
+    public void setUp() {
+        driver = Driver.getDriver();
+        commonPage = new CommonPage();
+        coursesPage = new CoursesPage();
+        loginPage = new LoginPage();
+        driver.get("https://batch-6.studymate.us/login");
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        Driver.getDriver().close();
+    }
 
     @Test
     public void addCoursesTest() throws InterruptedException {
-        driver.get("https://batch-6.studymate.us/login");
-        loginPage.testLogin("admin@codewise.com","codewise123","English");
+        loginPage.testLogin("admin@codewise.com", "codewise123", "English");
         loginPage.loginButton.click();
 
-        Thread.sleep(Duration.ofSeconds(3));
+        Thread.sleep(Duration.ofSeconds(3).toMillis());  // Using toMillis() for Thread.sleep
         commonPage.coursesPage.click();
 
         coursesPage.addCourseB8t.click();
@@ -37,15 +49,7 @@ public class CoursesPageTests {
 
         driver.navigate().refresh();
 
-        Assert.assertEquals("CHECK CHECK", coursesPage.newCourseName.getText());
-
-
-
-
-
+        // Assert the course was added successfully
+        Assert.assertEquals(coursesPage.newCourseName.getText(), "CHECK CHECK");
     }
-
-
-
 }
-

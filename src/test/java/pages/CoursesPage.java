@@ -1,4 +1,3 @@
-
 package pages;
 
 import org.openqa.selenium.WebDriver;
@@ -11,11 +10,9 @@ public class CoursesPage {
 
     WebDriver driver;
 
-    public CoursesPage (){
-
+    public CoursesPage() {
         this.driver = Driver.getDriver();
-        PageFactory.initElements(driver,this);
-
+        PageFactory.initElements(driver, this);
     }
 
     @FindBy(xpath = "//button[text()='Create course']")
@@ -35,15 +32,4 @@ public class CoursesPage {
 
     @FindBy(xpath = "(//div[@class=\"MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom sc-fbYMXx efYSLH css-1i17kim\"])[1]")
     public WebElement newCourseName;
-
-
-
-
-
-
-
-
-
-
 }
-
