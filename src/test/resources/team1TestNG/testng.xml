@@ -1,5 +1,16 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite">
-
-
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Smoke Test Suite Level">
+    <test name="Smoke Test Test Level">
+        <classes>
+            <class name="tests.helenTest">
+                <methods>
+                    <include name="testAddTeachers"/>
+                    <include name="testNegativecase"/>
+                    <include name="testAnnouncement"/>
+                    <include name="testAnnouncementNegative"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
+
