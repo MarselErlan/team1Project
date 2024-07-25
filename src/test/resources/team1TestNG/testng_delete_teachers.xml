@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Smoke Test Suite Level">
+    <test name="Smoke Test Test Level">
+        <classes>
+            <class name="tests.TeachersDeleteTest">
+                <methods>
+                    <include name="TeachersTestingFunc"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
